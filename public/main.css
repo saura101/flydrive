@@ -1,0 +1,44 @@
+* {
+    box-sizing: border-box;
+}
+
+.footer-padding {
+	padding-bottom: 60px;
+}
+
+.footer {
+	position:fixed;
+	text-align: center;
+	bottom: 0;
+	width: 100%;
+	height: 60px;
+	background-color: #d5d5d5;
+}
+
+.footer p {
+	font-size: 1rem;
+  color: #696969;
+}
+
+.custom-file-input::-webkit-file-upload-button {
+	visibility: hidden;
+  }
+
+.custom-file-label {
+	background-color: #dadada;
+}
+
+.custom-file-input::before {
+	content: "Choose File....                                                    "; 
+	display: inline-block;
+	color:#686868;
+}
+
+.custom-file-input::after {
+	content: "uploaded file... 													";
+}
+
+.link {
+	color:rgb(47, 47, 47);
+	text-decoration: none;
+}

@@ -1,0 +1,45 @@
+<%- include("partials/header.ejs") %>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 mx-auto">
+        <h1 class="text-center display-4 my-4">File Uploads</h1>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+          <div class="input-group mb-4">
+            <input type="file" name="file" id="file" class="form-control custom-file-input" id="file">
+            <label for="file" class="input-group-text custom-file-label">Browse</label>
+          </div>
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary">upload</button>  
+          </div>
+        </form>
+        <hr>
+        <% if(locals.files) {%>
+          <% for(let i=0;i<files.length;i++) {%>
+            <div class="card card-body mb-3">
+              <% if(files[i].isImage === true) {%>
+                <img src="images/<%= files[i].filename %>" alt="img">
+                <a href="images/<%= files[i].filename %>" target="_blank" class="link">
+                  <%= files[i].filename %>
+                </a>
+              <% } else { %>
+                <a href="images/<%= files[i].filename %>" target="_blank" class="link">
+                  <%= files[i].filename %>
+                </a>
+              <% } %>
+              <form action="/files/<%= files[i]._id %>?_method=DELETE" method="POST">
+                <div class="d-grid gap-2 ">
+                  <button class="btn btn-danger mt-4">Delete</button>
+                </div>
+                
+              </form>
+            </div>
+          <% } %>
+        <% } else { %>
+          <p>no  files</p>
+        <% } %>
+      </div>
+    </div>
+  </div>
+  
+
+<%- include("partials/footer.ejs") %>
