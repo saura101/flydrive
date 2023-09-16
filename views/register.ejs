@@ -1,0 +1,34 @@
+<%- include("partials/header.ejs") %>
+
+  <div class="wrapper" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Paper_Plane_Vector.svg/1200px-Paper_Plane_Vector.svg.png');">
+    <div class="inner">
+        <form action="/register" method="POST" class="form">
+        <h3>Sign up for FlyDrive</h3>
+          <div class="form-group">
+          <div class="form-wrapper">
+          <label for="fname">First Name</label>
+          <input type="text" class="form-control" name="fname">
+          </div>
+          <div class="form-wrapper">
+          <label for="lname">Last Name</label>
+          <input type="text" class="form-control" name="lname">
+          </div>
+          </div>
+    <div class="form-wrapper">
+    <label for="username">Email</label>
+    <input type="text" class="form-control" name="username">
+    </div>
+    <div class="form-wrapper">
+    <label for="password">Password</label>
+    <input type="password" class="form-control" name="password">
+    </div>
+        <div class="form-wrapper">
+          <label for="">Confirm Password</label>
+          <input type="password" class="form-control">
+          </div>
+          <button class="button" type="submit">Register Now</button>
+    </form>
+    </div>
+    </div>
+
+<%- include("partials/footer.ejs") %>
