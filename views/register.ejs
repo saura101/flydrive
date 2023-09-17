@@ -1,6 +1,8 @@
 <%- include("partials/header.ejs") %>
 
-  <div class="wrapper" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Paper_Plane_Vector.svg/1200px-Paper_Plane_Vector.svg.png');">
+  <div class="wrapper" 
+    style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Paper_Plane_Vector.svg/1200px-Paper_Plane_Vector.svg.png');"
+  >
     <div class="inner">
         <form action="/register" method="POST" class="form">
         <h3>Sign up for FlyDrive</h3>
@@ -26,8 +28,22 @@
           <label for="">Confirm Password</label>
           <input type="password" class="form-control">
           </div>
-          <button class="button" type="submit">Register Now</button>
+          <button class="button " type="submit">Register Now</button>
+          <div class="txt1 text-center p-t-54 p-b-20">
+            <span>
+            OR
+            </span>
+            </div>
+            <div class="flex-c-m">
+              <a href="#" class="login100-social-item bg1">
+                <i class="fa-brands fa-facebook-f" style="color: #ffffff;"></i>
+              </a>
+              <a href="auth/google" class="login100-social-item bg3">
+                <i class="fa-brands fa-google" style="color: #00ff00;"></i>
+              </a>
+              </div>
     </form>
+      
     </div>
     </div>
 

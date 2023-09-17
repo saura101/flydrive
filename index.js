@@ -12,6 +12,8 @@ import bcrypt from "bcrypt";
 import session from "express-session";
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
+import { Strategy as GoogleStrategy } from "passport-google-oauth20";
+import findOrCreate from "mongoose-findorcreate";
 
 const saltRounds = 10;
 const PORT = (process.env.PORT || 3000 );
@@ -41,8 +43,12 @@ const conn = mongoose.connection;
 const flySchema = new mongoose.Schema({
     username : String,
     password : String,
-    name : String
+    name : String,
+    googleId : String,
+    imgurl : String
 });
+
+flySchema.plugin(findOrCreate);
 
 const FlyUser = mongoose.model("flyuser", flySchema);
 
@@ -68,19 +74,23 @@ passport.use(new LocalStrategy(
         console.log(err);
         return done(err, false);
     }
-    //   FlyUser.findOne({ username: username }, function (err, user) {
-    //     if (err) { 
-    //         console.log(err);
-    //         return done(err); 
-    //     }
-    //     if (!user) { 
-    //         return done(null, false); 
-    //     }
-    //     if (!user.verifyPassword(password)) { return done(null, false); }
-    //     return done(null, user);
-    //   });
     }
   ));
+
+//google strategy
+passport.use(new GoogleStrategy({
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL: "http://localhost:3000/auth/google/dashboard"
+  },
+  function(accessToken, refreshToken, profile, cb) {
+    console.log(profile);
+    FlyUser.findOrCreate({ googleId: profile.id, name: profile.displayName, imgurl : profile._json.picture}, function (err, user) {
+      return cb(err, user);
+    });
+  }
+));
+
 
 //serialize and deserialize
 passport.serializeUser(function(user, done) {
@@ -153,6 +163,18 @@ app.get("/", (req,res) => {
     console.log(req.session);
     res.render("index.ejs");
 });
+
+app.get("/auth/google", passport.authenticate("google", { 
+    scope : ["profile"]  
+}));
+
+//authentcating google user
+app.get("/auth/google/dashboard", 
+  passport.authenticate("google", { failureRedirect: "/login" }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect("/dashboard");
+  });
 
 app.get("/user", (req,res) => {
     res.render("register.ejs");
