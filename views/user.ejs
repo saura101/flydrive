@@ -1,4 +1,9 @@
 <%- include("partials/header.ejs") %>
+<div class="logout-container">
+  <a class="logout" href="/logout">
+    <i class="fa-solid fa-right-from-bracket fa-2xl" style="color: #3e4551;"></i>
+  </a>
+</div>
   <div class="container">
     <div class="row">
       <div class="col-md-4 mx-auto">
@@ -19,11 +24,11 @@
               <% if(files[i].isImage === true) {%>
                 <img src="userimages/<%= files[i].filename %>" alt="img">
                 <a href="userimages/<%= files[i].filename %>" target="_blank" class="link">
-                  <%= files[i].filename %>
+                  <%= files[i].aliases %>
                 </a>
               <% } else { %>
-                <a href="images/<%= files[i].filename %>" target="_blank" class="link">
-                  <%= files[i].filename %>
+                <a href="userimages/<%= files[i].filename %>" target="_blank" class="link">
+                  <%= files[i].aliases %>
                 </a>
               <% } %>
               <form action="/files/<%= files[i]._id %>?_method=DELETE" method="POST">

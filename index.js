@@ -15,6 +15,7 @@ import { Strategy as LocalStrategy } from "passport-local";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import {Strategy as FacebookStrategy} from "passport-facebook";
 import findOrCreate from "mongoose-findorcreate";
+import  { body, validationResult } from "express-validator";
 
 const saltRounds = 10;
 const PORT = (process.env.PORT || 3000 );
@@ -26,7 +27,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
 app.use(session({
-    secret: "user files on the fly.",
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false
 }));
@@ -209,8 +210,8 @@ app.get('/auth/facebook/dashboard',
     res.redirect("/dashboard");
   });
 
-//route to get thr images
-
+//route to get the images
+//route called only in user.ejs
 app.get("/userimages/:filename", async(req,res) => {
     gridfsBucket = new mongoose.mongo.GridFSBucket(conn.db , {
         bucketName : "id"+req.session.passport.user.id
@@ -288,7 +289,7 @@ app.get("/login", async(req,res)=> {
     res.render("login.ejs");
 });
 
-
+//logout route
 app.get("/logout" ,(req,res) => {
     req.logout((err)=> {
         if(err) {
@@ -299,8 +300,31 @@ app.get("/logout" ,(req,res) => {
     
 });
 
-//post register
-app.post("/register" ,async(req,res) => {
+
+//post register 
+//express-validator middlewares
+//for data validation
+app.post("/register" ,[
+    body("username","enter a valid email").isEmail().notEmpty().custom(async(value)=> {
+        const user = await FlyUser.findOne({username : value});
+        if(user) {
+            throw new Error("E-mail already in use");
+        }
+    }),
+    body("fname","enter a valid name").isLength({ min: 2}),
+    body("lname","enter a valid name").isLength({min : 2}),
+    body("password").notEmpty()
+],async(req,res) => {
+
+
+    const result = validationResult(req);
+    if (!result.isEmpty()) {
+        console.log(result);
+        return res.render("register.ejs",{err : result.errors[0]});
+    }
+
+
+
     const hash = await bcrypt.hash(req.body.password,saltRounds);
 
     const newUser = new FlyUser({
@@ -341,19 +365,21 @@ app.post("/login",passport.authenticate("local", { failureRedirect: '/login', fa
 });
 
 
-
+//upload post route
 app.post("/upload",upload.single('file'), (req,res) => {
     console.log(req.file);
     res.redirect("/dashboard");
     console.log("upload sucessful");
 });
 
+
+//delete files
 app.delete("/files/:id" ,async (req,res) => {
     gridfsBucket = new mongoose.mongo.GridFSBucket(conn.db , {
-        bucketName : "use"
+        bucketName :"id"+req.session.passport.user.id
     });
     let gfs = Grid(conn.db);
-    gfs.collection("use");
+    gfs.collection("id"+req.session.passport.user.id);
     console.log(req.params.id);
     try {
         await gridfsBucket.delete(new mongoose.Types.ObjectId(req.params.id));

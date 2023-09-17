@@ -198,7 +198,16 @@ select option[value=""][disabled] {
     font-size: 1.5rem;
     line-height: 1.5;
     color: #303030;
+    text-decoration:none!important;
 }
+
+.noul {
+    text-decoration:none!important;
+    color:#686868;
+    line-height: 1.5;
+    font-size: 1.2rem;
+}
+
 .p-t-54 {
     padding-top: 30px;
 }
@@ -235,4 +244,10 @@ select option[value=""][disabled] {
 }
 .bg3 {
     background-color: #ff4242;
+}
+.logout-container {
+    display: flex;
+    justify-content: end;
+    margin-top: 3%;
+    margin-right: 3%;
 }
