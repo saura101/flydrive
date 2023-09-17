@@ -13,6 +13,7 @@ import session from "express-session";
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
+import {Strategy as FacebookStrategy} from "passport-facebook";
 import findOrCreate from "mongoose-findorcreate";
 
 const saltRounds = 10;
@@ -40,11 +41,13 @@ console.log(mongoURL);
 await mongoose.connect(mongoURL);
 const conn = mongoose.connection;
 
+//userschema
 const flySchema = new mongoose.Schema({
     username : String,
     password : String,
     name : String,
     googleId : String,
+    facebookId : String,
     imgurl : String
 });
 
@@ -92,6 +95,20 @@ passport.use(new GoogleStrategy({
 ));
 
 
+//facebook strategy
+passport.use(new FacebookStrategy({
+    clientID: process.env.FACEBOOK_APP_ID,
+    clientSecret: process.env.FACEBOOK_APP_SECRET,
+    callbackURL: "http://localhost:3000/auth/facebook/dashboard"
+  },
+  function(accessToken, refreshToken, profile, cb) {
+    console.log(profile);
+    FlyUser.findOrCreate({ facebookId: profile.id, name: profile.displayName}, function (err, user) {
+      return cb(err, user);
+    });
+  }
+));
+
 //serialize and deserialize
 passport.serializeUser(function(user, done) {
     console.log("serialize");
@@ -133,7 +150,7 @@ conn.once("open" , () => {
     gfs.collection("use");
 });
 
-
+//creating storage
 const storage = new GridFsStorage({ 
     db : conn,
     // file : (req,file) => {
@@ -164,13 +181,27 @@ app.get("/", (req,res) => {
     res.render("index.ejs");
 });
 
+
+//google login
 app.get("/auth/google", passport.authenticate("google", { 
     scope : ["profile"]  
 }));
 
+//facebook login
+app.get('/auth/facebook',
+  passport.authenticate('facebook'));
+
 //authentcating google user
 app.get("/auth/google/dashboard", 
   passport.authenticate("google", { failureRedirect: "/login" }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect("/dashboard");
+  });
+
+//authenticating facebook user
+app.get('/auth/facebook/dashboard',
+  passport.authenticate('facebook', { failureRedirect: '/login' }),
   function(req, res) {
     // Successful authentication, redirect home.
     res.redirect("/dashboard");
@@ -307,18 +338,6 @@ app.post("/login",passport.authenticate("local", { failureRedirect: '/login', fa
     const password = req.body.password;
     console.log(req.user);
     res.redirect("/dashboard");
-    /////// this is without passport or sessions
-    // const user = await FlyUser.findOne({ username : username})
-    // if(!user) {
-    //     res.render("register.ejs", {err: "wrong username or password"});
-    // } else {
-    //     const match = await bcrypt.compare(password, user.password);
-    //     if(match) {
-    //         res.redirect("/dashboard");
-    //     } else {
-    //         res.render("register.ejs", {err: "wrong username or password"});
-    //     }
-    // }
 });
 
 
