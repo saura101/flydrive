@@ -87,7 +87,7 @@ passport.use(new GoogleStrategy({
     callbackURL: "http://localhost:3000/auth/google/dashboard"
   },
   function(accessToken, refreshToken, profile, cb) {
-    console.log(profile);
+    // console.log(profile);
     FlyUser.findOrCreate({ googleId: profile.id, name: profile.displayName, imgurl : profile._json.picture}, function (err, user) {
       return cb(err, user);
     });
@@ -102,7 +102,7 @@ passport.use(new FacebookStrategy({
     callbackURL: "http://localhost:3000/auth/facebook/dashboard"
   },
   function(accessToken, refreshToken, profile, cb) {
-    console.log(profile);
+    // console.log(profile);
     FlyUser.findOrCreate({ facebookId: profile.id, name: profile.displayName}, function (err, user) {
       return cb(err, user);
     });
@@ -161,11 +161,13 @@ const storage = new GridFsStorage({
     //     }
     // }
     file : (req,file)=> {
+        console.log("hello ji kaise ho sare");
+        console.log(req.session.passport.user.id);
         return new Promise((resolve , reject) => {
             const filename2 = file.originalname;
             const fileInfo = {
                 aliases : filename2,
-                bucketName : "use"
+                bucketName : "id"+req.session.passport.user.id
             };
         resolve(fileInfo);
         })
@@ -207,19 +209,16 @@ app.get('/auth/facebook/dashboard',
     res.redirect("/dashboard");
   });
 
-app.get("/user", (req,res) => {
-    res.render("register.ejs");
-});
-
-
 //route to get thr images
 
-app.get("/images/:filename", async(req,res) => {
+app.get("/userimages/:filename", async(req,res) => {
     gridfsBucket = new mongoose.mongo.GridFSBucket(conn.db , {
-        bucketName : "use"
+        bucketName : "id"+req.session.passport.user.id
     });
     let gfs = Grid(conn.db);
-    gfs.collection("use");
+    console.log("hello from images");
+    console.log(req.params.filename);
+    gfs.collection("id"+req.session.passport.user.id);
     const img = await gfs.files.findOne({ filename : req.params.filename });
     //console.log(img);
     //console.log(img._id);
@@ -235,11 +234,12 @@ app.get("/images/:filename", async(req,res) => {
 //protected page requires authentication
 app.get("/dashboard", async(req,res) => {
     
-    console.log(req.user);
-    console.log(req.session);
+    //console.log(req.user);
+    //console.log(req.sessionID);
     if(req.isAuthenticated()) {
+        console.log(req.session.passport.user.id);
         gfs = Grid(conn.db);
-        gfs.collection("use");
+        gfs.collection("id"+req.session.passport.user.id);
         const files = await gfs.files.find().toArray();
         //res.status(200).json({files});
         console.log(files);

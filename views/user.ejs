@@ -17,8 +17,8 @@
           <% for(let i=0;i<files.length;i++) {%>
             <div class="card card-body mb-3">
               <% if(files[i].isImage === true) {%>
-                <img src="images/<%= files[i].filename %>" alt="img">
-                <a href="images/<%= files[i].filename %>" target="_blank" class="link">
+                <img src="userimages/<%= files[i].filename %>" alt="img">
+                <a href="userimages/<%= files[i].filename %>" target="_blank" class="link">
                   <%= files[i].filename %>
                 </a>
               <% } else { %>
