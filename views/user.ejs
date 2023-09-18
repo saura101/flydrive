@@ -21,12 +21,30 @@
         <% if(locals.files) {%>
           <% for(let i=0;i<files.length;i++) {%>
             <div class="card card-body mb-3">
+              <div class="download">
+                <a href="userimages/<%= files[i].filename %>" download=<%= files[i].aliases %>>
+                  <i class="fa-solid fa-cloud-arrow-down fa-xl" style="color: #858585;"></i>
+                </a>
+              </div>
               <% if(files[i].isImage === true) {%>
-                <img src="userimages/<%= files[i].filename %>" alt="img">
+                <img class="userimage" src="userimages/<%= files[i].filename %>" alt="img">
                 <a href="userimages/<%= files[i].filename %>" target="_blank" class="link">
                   <%= files[i].aliases %>
                 </a>
+                <% } else if(files[i].contentType === "video/mp4") { %>
+                  <video class="userimage" controls="controls">
+                    <source src="userimages/<%= files[i].filename %>" type="video/mp4" />
+                   </video>
+                   <a href="userimages/<%= files[i].filename %>" target="_blank" class="link">
+                    <%= files[i].aliases %>
+                  </a>
               <% } else { %>
+                <iframe
+                  src="userimages/<%= files[i].filename %>"
+                  frameBorder="0"
+                  scrolling="auto"
+                  class="userimage"
+                ></iframe>  
                 <a href="userimages/<%= files[i].filename %>" target="_blank" class="link">
                   <%= files[i].aliases %>
                 </a>
@@ -35,7 +53,6 @@
                 <div class="d-grid gap-2 ">
                   <button class="btn btn-danger mt-4">Delete</button>
                 </div>
-                
               </form>
             </div>
           <% } %>

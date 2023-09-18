@@ -251,3 +251,13 @@ select option[value=""][disabled] {
     margin-top: 3%;
     margin-right: 3%;
 }
+.download {
+    display:flex;
+    justify-content: end;
+    margin-bottom: 1rem;
+}
+.userimage {
+    height: 200px;
+    width: auto;
+
+}
