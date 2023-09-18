@@ -1,8 +1,8 @@
 <%- include("partials/header.ejs") %>
 
-  <div class="wrapper" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Paper_Plane_Vector.svg/1200px-Paper_Plane_Vector.svg.png');">
+  <div class="wrapper login-wrap" style="background-image: url('https://static.vecteezy.com/system/resources/previews/019/906/484/original/paper-plane-graphic-clipart-design-free-png.png');">
     <div class="inner">
-        <form action="/login" method="POST" class="form">
+        <form action="/login" method="POST" class="form-login">
         <h3>Sign in to FlyDrive</h3>
     <div class="form-wrapper">
     <label for="username">Email</label>
@@ -13,6 +13,13 @@
     <input type="password" class="form-control" name="password">
     </div>
           <button class="button" type="submit">Sign In</button>
+          <div class="text-center" style="margin-top: 5px;">
+            <a href="/register" class="noul">
+              <span>
+                Don't have an account
+              </span>
+            </a>
+          </div>
           <div class="txt1 text-center p-t-54 p-b-20">
             <span>
             OR

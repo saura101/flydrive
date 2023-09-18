@@ -1,16 +1,16 @@
 <%- include("partials/header.ejs") %>
 <div class="logout-container">
   <a class="logout" href="/logout">
-    <i class="fa-solid fa-right-from-bracket fa-2xl" style="color: #3e4551;"></i>
+    <i class="fa-solid fa-right-from-bracket fa-2xl" style="color: #5B0888;"></i>
   </a>
 </div>
-  <div class="container">
+  <div class="container" >
     <div class="row">
       <div class="col-md-4 mx-auto">
-        <h1 class="text-center display-4 my-4">File Uploads</h1>
+        <h1 class="text-center display-4 my-4" style="font-weight:400;">File Uploads</h1>
         <form action="/upload" method="post" enctype="multipart/form-data">
           <div class="input-group mb-4">
-            <input type="file" name="file" id="file" class="form-control custom-file-input" id="file">
+            <input type="file" name="file" id="file" class="form-control custom-file-input" required>
             <label for="file" class="input-group-text custom-file-label">Browse</label>
           </div>
           <div class="d-grid gap-2">
@@ -23,7 +23,7 @@
             <div class="card card-body mb-3">
               <div class="download">
                 <a href="userimages/<%= files[i].filename %>" download=<%= files[i].aliases %>>
-                  <i class="fa-solid fa-cloud-arrow-down fa-xl" style="color: #858585;"></i>
+                  <i class="fa-solid fa-cloud-arrow-down fa-xl" style="color: #5B0888;"></i>
                 </a>
               </div>
               <% if(files[i].isImage === true) {%>

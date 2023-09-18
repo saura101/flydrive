@@ -1,8 +1,21 @@
 <%- include("partials/header.ejs") %>
-
-  <form action="/register" method="get">
-    <button class="btn btn-lg btn-primary">Getting Started</button>
+  <div class="typed">
+    <h1 >FlyDrive is the easiest way to <span class="auto-type"></span> </h1>
+  </div>
+  <div class="p"> 
+    <p>Fully-managed, secure cloud file storage.FlyDrive enables application migration to cloud without requiring you to rewrite or rearchitect, accelerating and simplifying your migration.</p>
+  </div>
+  <form action="/register" method="get" class="dashboard-form">
+    <button class="btn btn-lg btn-primary dashboard-btn">Getting Started</button>
   </form>
 
-
+  <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+  <script>
+    var typed = new Typed(".auto-type", {
+      strings : ["store files","retrieve files","manage files"],
+      typeSpeed : 150,
+      backSpeed : 150,
+      loop : true
+    });
+  </script>
 <%- include("partials/footer.ejs") %>

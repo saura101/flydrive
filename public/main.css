@@ -2,40 +2,101 @@
     box-sizing: border-box;
 }
 
-.footer-padding {
-	padding-bottom: 60px;
+body {
+    background-color: #7C73C0;
+    background-image: url("https://www.transparenttextures.com/patterns/diamond-upholstery.png");
+
+}
+.navbar {
+    /* background-color: #E8FFCE!important; */
+    background-color: #fffcfc!important;
+    margin-bottom: 1rem;
+    padding-top: 1rem;
+}
+.navlogo {
+    margin-right: 1rem;
+    margin-left: 1rem;
+}
+.dashboard-btn {
+    margin-right: 1.5rem;
+    color:azure;
+    background-color: #5B0888;
+    border-radius: 25px;
+}
+.dashboard-btn:hover {
+    background-color:#E5CFF7;
+    color:#5B0888;
+    border-radius: 25px;
 }
 
-.footer {
-	position:fixed;
-	text-align: center;
-	bottom: 0;
-	width: 100%;
-	height: 60px;
-	background-color: #d5d5d5;
+.btn-lg {
+
+    font-weight: 500;
+    width:350px;
+    padding:10px;
 }
 
-.footer p {
-	font-size: 1rem;
-  color: #696969;
-}
+.footer-basic {
+    padding:5px 0;
+    color:#4b4c4d;
+    width: 100%;
+    margin-top: 5%;
+  }
+  
+  .footer-basic .social {
+    text-align:center;
+    padding-bottom:2px;
+  }
+  
+  .footer-basic .social > a {
+    font-size:24px;
+    width:40px;
+    height:40px;
+    line-height:40px;
+    display:inline-block;
+    text-align:center;
+    border-radius:50%;
+    border:1px solid azure;
+    margin:0 8px;
+    color:inherit;
+    opacity:0.75;
+  }
+  
+  .footer-basic .social > a:hover {
+    opacity:0.9;
+  }
+  
+  .footer-basic .copyright {
+    margin-top:2px;
+    text-align:center;
+    font-size:15px;
+    color:azure;
+    margin-bottom:0;
+  }
 
 .custom-file-input::-webkit-file-upload-button {
 	visibility: hidden;
   }
-
+#file {
+    background-color: #E5CFF7;
+}
 .custom-file-label {
-	background-color: #dadada;
+	background-color: #5B0888;
+    color:azure;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    padding-bottom: 9px;
+}
+
+.custom-file-input {
+    color:#686868;
 }
 
 .custom-file-input::before {
-	content: "Choose File....                                                    "; 
+    padding-top: 5px;
+	content: "Choose File...."; 
 	display: inline-block;
 	color:#686868;
-}
-
-.custom-file-input::after {
-	content: "uploaded file... 													";
 }
 
 .link {
@@ -57,19 +118,27 @@
     margin: auto;
     padding-top: 68px;
     padding-bottom: 48px;
-    background: url(../images/registration-form-2.jpg)
 }
 .inner h3 {
     font-size: 22px;
     font-family: muli-bold;
     text-align: center;
     margin-bottom: 32px;
-    color: #333;
+    color: azure;
     letter-spacing: 2px
 }
 .form {
     width: 50%;
-    padding-left: 45px
+    padding-left: 45px;
+    color:azure;
+    font-family: muli-bold;
+}
+.form-login {
+    float: right;
+    width: 50%;
+    padding-left: 45px;
+    color:azure;
+    font-family: muli-bold;
 }
 
 .form-group {
@@ -144,7 +213,7 @@ select option[value=""][disabled] {
     align-items: center;
     justify-content: center;
     padding: 0;
-    background: #ae3c33;
+    background: #5B0888;
     font-size: 13px;
     color: #fff;
     text-transform: uppercase;
@@ -169,7 +238,7 @@ select option[value=""][disabled] {
     left: 0;
     right: 0;
     bottom: 0;
-    background: #f11a09;
+    background: #E5CFF7;
     -webkit-transform: scaleX(0);
     transform: scaleX(0);
     -webkit-transform-origin: 0 50%;
@@ -182,6 +251,9 @@ select option[value=""][disabled] {
     transition-timing-function: ease-out
 }
 
+.button:hover {
+    color:#5B0888;
+}
 .button:hover:before {
     -webkit-transform: scaleX(1);
     transform: scaleX(1);
@@ -195,24 +267,26 @@ select option[value=""][disabled] {
 
 .txt1 {
     font-family: Poppins-Regular;
-    font-size: 1.5rem;
+    font-size: 1rem;
     line-height: 1.5;
-    color: #303030;
+    color: azure;
     text-decoration:none!important;
+    font-family: muli-bold;
 }
 
 .noul {
     text-decoration:none!important;
-    color:#686868;
+    color:azure;
     line-height: 1.5;
     font-size: 1.2rem;
+    font-family: muli-bold;
 }
 
 .p-t-54 {
-    padding-top: 30px;
+    padding-top: 10px;
 }
 .p-b-20 {
-    padding-bottom: 15px;
+    padding-bottom: 1px;
 }
 .flex-c-m {
     display: -webkit-box;
@@ -234,8 +308,8 @@ select option[value=""][disabled] {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     margin: 10px;
 }
@@ -260,4 +334,45 @@ select option[value=""][disabled] {
     height: 200px;
     width: auto;
 
+}
+.card {
+    background-color: #E5CFF7;
+    background-image: url("https://www.transparenttextures.com/patterns/diamond-upholstery.png");
+}
+.login-wrap {
+    background-repeat:no-repeat;
+    background-position: left top;
+    background-size: 40% 400px;
+}
+.typed {
+    width :auto;
+    height: 40vh;
+    color: azure;
+    display: flex;
+    align-items: center;
+    margin-left: 8%;
+
+}
+.typed h1 {
+    width: 23%;
+    font-size: 3rem;
+    line-height: 3.5rem;
+}
+.dashboard-form {
+    margin-left: 8%;
+}
+.auto-type {
+    color:#5B0888;
+}
+.p {
+    width :auto;
+    color: azure;
+    display: flex;
+    align-items: center;
+    margin-left: 8%;
+    margin-bottom: 2%;
+}
+.p p {
+    width: 30%;
+    font-size: 1.2rem;
 }
