@@ -7,14 +7,14 @@
   <div class="container" >
     <div class="row">
       <div class="col-md-4 mx-auto">
-        <h1 class="text-center display-4 my-4" style="font-weight:400;">File Uploads</h1>
+        <h1 class="text-center display-4 my-4" style="font-weight:400; color:#5B0888;">File Uploads</h1>
         <form action="/upload" method="post" enctype="multipart/form-data">
           <div class="input-group mb-4">
             <input type="file" name="file" id="file" class="form-control custom-file-input" required>
             <label for="file" class="input-group-text custom-file-label">Browse</label>
           </div>
           <div class="d-grid gap-2">
-            <button type="submit" class="btn btn-primary">upload</button>  
+            <button type="submit" class="btn btn-primary upload-btn">upload</button>  
           </div>
         </form>
       </div>
@@ -33,13 +33,20 @@
                   <a href="userimages/<%= files[i].filename %>" target="_blank" class="link">
                     <%= files[i].aliases %>
                   </a>
-                  <% } else if(files[i].contentType === "video/mp4" || files[i].contentType === "audio/mp3") { %>
+                  <% } else if(files[i].contentType === "video/mp4") { %>
                     <video class="userimage" controls="controls">
                       <source src="userimages/<%= files[i].filename %>" type="video/mp4" />
                      </video>
                      <a href="userimages/<%= files[i].filename %>" target="_blank" class="link" type="video/mp4">
                       <%= files[i].aliases %>
                     </a>
+                    <% } else if(files[i].contentType === "audio/mp3" || files[i].contentType === "audio/mpeg") { %>
+                      <audio class="userimage audio" controls="controls">
+                        <source src="userimages/<%= files[i].filename %>" type="video/mp4" />
+                      </audio>
+                       <a href="userimages/<%= files[i].filename %>" target="_blank" class="link" type="video/mp4">
+                        <%= files[i].aliases %>
+                      </a>
                 <% } else { %>
                   <iframe
                     src="userimages/<%= files[i].filename %>"
@@ -61,11 +68,12 @@
             
           <% } %>
         <% } else { %>
-          <p>no  files</p>
+          <div class="nofile">
+            <p>No files to display!!</p>
+          </div>
         <% } %>
       </div>
     </div>
   </div>
-  
 
 <%- include("partials/footer.ejs") %>
