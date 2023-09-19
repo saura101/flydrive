@@ -313,7 +313,7 @@ app.post("/register" ,[
     }),
     body("fname","enter a valid name").isLength({ min: 2}),
     body("lname","enter a valid name").isLength({min : 2}),
-    body("password").notEmpty()
+    body("password","password cannot be empty").notEmpty()
 ],async(req,res) => {
 
 

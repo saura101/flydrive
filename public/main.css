@@ -312,12 +312,14 @@ select option[value=""][disabled] {
     height: 40px;
     border-radius: 50%;
     margin: 10px;
+    box-shadow: 2px 2px 3px #3a3a3a;
 }
+
 .bg1 {
-    background-color: #3b5998;
+    background-color: azure;
 }
 .bg3 {
-    background-color: #ff4242;
+    background-color: azure;
 }
 .logout-container {
     display: flex;
@@ -389,4 +391,12 @@ select option[value=""][disabled] {
     font-size: 1.2rem;
     font-weight: 400;
     margin-left: 4%;
+}
+
+.fa-google {
+    background: conic-gradient(from -45deg, #ea4335 110deg, #4285f4 90deg 180deg, #34a853 180deg 270deg, #fbbc05 270deg) 73% 55%/150% 150% no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
 }
