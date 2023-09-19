@@ -85,7 +85,9 @@ passport.use(new LocalStrategy(
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://localhost:3000/auth/google/dashboard"
+    //callback needs to change for diff domains
+    //callbackURL: "http://localhost:3000/auth/google/dashboard"
+    callbackURL: "https://flydrive.onrender.com/auth/google/dashboard"
   },
   function(accessToken, refreshToken, profile, cb) {
     // console.log(profile);
@@ -100,7 +102,9 @@ passport.use(new GoogleStrategy({
 passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOK_APP_ID,
     clientSecret: process.env.FACEBOOK_APP_SECRET,
-    callbackURL: "http://localhost:3000/auth/facebook/dashboard"
+    //callback needs to change for diff domains
+    //callbackURL: "http://localhost:3000/auth/facebook/dashboard"
+    callbackURL: "https://flydrive.onrender.com/auth/facebook/dashboard"
   },
   function(accessToken, refreshToken, profile, cb) {
     // console.log(profile);
@@ -154,13 +158,6 @@ conn.once("open" , () => {
 //creating storage
 const storage = new GridFsStorage({ 
     db : conn,
-    // file : (req,file) => {
-    //     const fileName = "userfile";
-    //     return {
-    //         bucketName : "user",
-    //         fileName : file.originalname
-    //     }
-    // }
     file : (req,file)=> {
         console.log("hello ji kaise ho sare");
         console.log(req.session.passport.user.id);
