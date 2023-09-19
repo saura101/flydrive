@@ -3,6 +3,12 @@
   <div class="wrapper login-wrap" style="background-image: url('https://static.vecteezy.com/system/resources/previews/019/906/484/original/paper-plane-graphic-clipart-design-free-png.png');">
     <div class="inner">
         <form action="/login" method="POST" class="form-login">
+          <% if(locals.err) {%>
+            <div class="err">
+              <i class="fa-solid fa-triangle-exclamation" style="color: #ff0000; margin-top: 2%;"></i>
+              <p class="err-msg"><%= err %></p>
+            </div>
+            <% } %>
         <h3>Sign in to FlyDrive</h3>
     <div class="form-wrapper">
     <label for="username">Email</label>

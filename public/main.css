@@ -159,7 +159,7 @@ body {
 
 .form-wrapper label {
     margin-bottom: 9px;
-    display: block
+    display: block;
 }
 
 .form-control {
@@ -375,4 +375,18 @@ select option[value=""][disabled] {
 .p p {
     width: 30%;
     font-size: 1.2rem;
+}
+.err {
+    display: flex;
+    background-color: rgb(255, 223, 223);
+    padding-left: 30px;
+    border-radius: 8px;
+    opacity: 0.5;
+    padding-top: 5%;
+}
+.err-msg {
+    color :rgb(255, 32, 32);
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-left: 4%;
 }

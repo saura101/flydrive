@@ -35,7 +35,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-
+//mongodb://127.0.0.1:27017/flyDB
 const mongoURL = process.env.MONGOURL;
 console.log(mongoURL);
 
@@ -320,7 +320,7 @@ app.post("/register" ,[
     const result = validationResult(req);
     if (!result.isEmpty()) {
         console.log(result);
-        return res.render("register.ejs",{err : result.errors[0]});
+        return res.render("register.ejs",{err : JSON.stringify(result.errors[0].msg)});
     }
 
 
@@ -354,7 +354,7 @@ app.post("/register" ,[
 });
 
 //post login
-app.post("/login",passport.authenticate("local", { failureRedirect: '/login', failureMessage: true }),async(req,res)=> {
+app.post("/login",passport.authenticate("local", { failureRedirect: '/login', failureMessage: "Invalid username or password" }),async(req,res)=> {
 
 
     //if auth success then we have req.user property

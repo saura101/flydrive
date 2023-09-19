@@ -5,6 +5,12 @@
   >
     <div class="inner">
         <form action="/register" method="POST" class="form">
+          <% if(locals.err) {%>
+            <div class="err">
+              <i class="fa-solid fa-triangle-exclamation" style="color: #ff0000; margin-top: 2%;"></i>
+              <p class="err-msg"><%= err %></p>
+            </div>
+            <% } %>
         <h3>Sign up for FlyDrive</h3>
           <div class="form-group">
           <div class="form-wrapper">
