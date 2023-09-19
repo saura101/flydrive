@@ -35,6 +35,13 @@ body {
     width:350px;
     padding:10px;
 }
+.btn-primary {
+    background-image: linear-gradient(to right, #5B0888,rgb(51, 51, 255));
+}
+
+.btn-danger {
+    background-image: linear-gradient(to right, red , #5B0888);
+}
 
 .footer-basic {
     padding:5px 0;
